@@ -2,6 +2,7 @@
 
 ## Requirement
 Run with Python 3.6 or higher or run the exe file. 
+To run on custom IMVU clients you need to run this with Python and change the custom_client value to True in the file.
 
 ## What does this script do?
 IMVU by default only handles 3 concurrent requests. This slows down the client significantly. 

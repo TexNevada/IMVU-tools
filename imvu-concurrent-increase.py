@@ -58,7 +58,7 @@ def run(imvu_path=imvu_client_path):
             # Write the source file into the zip at the specified relative path
             zipf.write(source_file, arcname=relative_path_in_zip + source_file)
 
-    print("File written successfully.")
+    print(f"{source_file} has been added to library.zip.")
 
     # Process the checksum file
     try:
@@ -81,7 +81,8 @@ def run(imvu_path=imvu_client_path):
 
     os.remove(source_file)
     os.remove(library_zip_temp_path)
-    print(f"{source_file} has been added to library.zip.")
+    print(f"Correct checksum file.")
+    print("Done!")
 
 if __name__ == "__main__":
     run()

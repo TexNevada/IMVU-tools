@@ -2,14 +2,19 @@ import os
 import zipfile
 import shutil
 appdata_path = os.path.expandvars(os.getenv('APPDATA'))
-imvu_client_path = f"{appdata_path}\\IMVUClient\\"
+imvu_client_path = f"{appdata_path}\\IMVUClient"
+local_code_files = ".\\Files\\imvu\\http"
 custom_client = False
+
+
 def run(imvu_path=imvu_client_path):
 
     if custom_client is True:
         print("Please provide your custom IMVU client path")
         alternative_client_folder = input("[custom IMVU Client path]: ")
         imvu_path = alternative_client_folder
+    else:
+        imvu_path = imvu_client_path
 
     print("################################################################################")
     print("#                        Select one of the options                             #")
@@ -19,11 +24,9 @@ def run(imvu_path=imvu_client_path):
     print("# 4. 64 concurrent http connections (Diminishing returns)                      #")
     print("################################################################################")
 
-    
-    
-    library_zip_path = f"{appdata_path}\\IMVUClient\\library.zip"
-    library_zip_temp_path = f"{appdata_path}\\IMVUClient\\library-temp.zip"
-    checksum_path = f"{appdata_path}\\IMVUClient\\checksum.txt"
+    library_zip_path = f"{imvu_path}\\library.zip"
+    library_zip_temp_path = f"{imvu_path}\\library-temp.zip"
+    checksum_path = f"{imvu_path}\\checksum.txt"
     relative_path_in_zip = "imvu/http/"
 
     user_input = input("[1, 2, 3 or 4]: ")
@@ -33,17 +36,16 @@ def run(imvu_path=imvu_client_path):
 
     source_file = None
     if int(user_input) == 1:
-        source_file = "DownloadManager-8.pyo"
+        source_file = f"{local_code_files}\\DownloadManager-8.pyo"
     elif int(user_input) == 2:
-        source_file = "DownloadManager-16.pyo"
+        source_file = f"{local_code_files}\\DownloadManager-16.pyo"
     elif int(user_input) == 3:
-        source_file = "DownloadManager-32.pyo"
+        source_file = f"{local_code_files}\\DownloadManager-32.pyo"
     elif int(user_input) == 4:
-        source_file = "DownloadManager-64.pyo"
+        source_file = f"{local_code_files}\\DownloadManager-64.pyo"
     else:
         print("Invalid input. Please choose between 1 and 4.")
         exit(1)
-
 
     shutil.copy(source_file, "DownloadManager.pyo")
     source_file = "DownloadManager.pyo"
@@ -84,5 +86,6 @@ def run(imvu_path=imvu_client_path):
     print(f"Correct checksum file.")
     print("Done!")
 
+
 if __name__ == "__main__":
-    run()
+    run(imvu_path=imvu_client_path)
